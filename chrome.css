@@ -1,13 +1,13 @@
-/* Zoom on Load — mod para Zen Browser
- * Enquanto a aba selecionada está carregando (atributo [busy]), o conteúdo fica
- * levemente reduzido. Quando termina, ele dá um zoom até o tamanho normal.
+/* Zoom on Tab Switch — mod para Zen Browser
+ * Quando você troca de aba, o conteúdo da nova aba faz um zoom suave
+ * até o tamanho normal.
  */
 
 :root {
   --zol-scale: 0.94;      /* escala inicial (menor que 1 = zoom in; maior que 1 = zoom out) */
-  --zol-duration: 0.6s;   /* duração do zoom */
+  --zol-duration: 0.35s;  /* duração do zoom */
   --zol-easing: cubic-bezier(0.22, 1, 0.36, 1);
-  --zol-dim: 0.85;        /* opacidade durante o carregamento */
+  --zol-dim: 0.85;        /* opacidade inicial */
 }
 
 #tabbrowser-tabpanels .browserSidebarContainer,
@@ -15,28 +15,25 @@
   overflow: hidden;
 }
 
-/* Página carregada: anima até a escala normal */
-#tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack {
-  transform: scale(1);
-  opacity: 1;
-  transform-origin: center center;
-  transition:
-    transform var(--zol-duration) var(--zol-easing),
-    opacity var(--zol-duration) ease-out;
-  will-change: transform;
+@keyframes zol-tab-zoom {
+  from {
+    transform: scale(var(--zol-scale));
+    opacity: var(--zol-dim);
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-/* Carregando: escala inicial, sem transição */
-#main-window:has(#tabbrowser-tabs .tabbrowser-tab[selected][busy])
-  #tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack {
-  transform: scale(var(--zol-scale));
-  opacity: var(--zol-dim);
-  transition: none;
+/* A animação roda toda vez que um painel passa a ser o selecionado */
+#tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack {
+  transform-origin: center center;
+  animation: zol-tab-zoom var(--zol-duration) var(--zol-easing) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   #tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack {
-    transition: none !important;
-    transform: none !important;
+    animation: none !important;
   }
 }
