@@ -4,10 +4,10 @@
  */
 
 :root {
-  --zol-scale: 0.975;     /* escala inicial (menor que 1 = zoom in; maior que 1 = zoom out) */
-  --zol-duration: 0.55s;  /* duração do zoom */
-  --zol-easing: cubic-bezier(0.25, 0.8, 0.25, 1);
-  --zol-dim: 0.92;        /* opacidade inicial */
+  --zol-scale: 0.985;     /* escala inicial (menor que 1 = zoom in; maior que 1 = zoom out) */
+  --zol-duration: 0.9s;   /* duração do zoom */
+  --zol-easing: cubic-bezier(0.33, 1, 0.68, 1);
+  --zol-dim: 0.96;        /* opacidade inicial */
 }
 
 #tabbrowser-tabpanels .browserSidebarContainer,
@@ -38,10 +38,10 @@
  * na animação de troca de aba acima.
  */
 :root {
-  --zol-load-scale: 0.96;
-  --zol-load-duration: 0.7s;
-  --zol-load-easing: cubic-bezier(0.25, 0.8, 0.25, 1);
-  --zol-load-dim: 0.9;
+  --zol-load-scale: 0.975;
+  --zol-load-duration: 1.2s;
+  --zol-load-easing: cubic-bezier(0.33, 1, 0.68, 1);
+  --zol-load-dim: 0.94;
 }
 
 /* Página carregada: volta à escala normal com transição */
