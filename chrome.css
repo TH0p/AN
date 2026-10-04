@@ -33,6 +33,42 @@
   animation: zol-tab-zoom var(--zol-duration) var(--zol-easing) both;
 }
 
+/* ---------- Zoom ao terminar de carregar a página ----------
+ * Usa o elemento <browser> (filho do .browserStack), então não interfere
+ * na animação de troca de aba acima.
+ */
+:root {
+  --zol-load-scale: 0.96;
+  --zol-load-duration: 0.7s;
+  --zol-load-easing: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --zol-load-dim: 0.9;
+}
+
+/* Página carregada: volta à escala normal com transição */
+#tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack > browser {
+  transform: scale(1);
+  opacity: 1;
+  transform-origin: center center;
+  transition:
+    transform var(--zol-load-duration) var(--zol-load-easing),
+    opacity var(--zol-load-duration) ease-out;
+}
+
+/* Carregando: reduzida, sem transição */
+:root:has(#tabbrowser-tabs tab[selected]:is([busy], [progress]))
+  #tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack > browser {
+  transform: scale(var(--zol-load-scale));
+  opacity: var(--zol-load-dim);
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack > browser {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   #tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack {
     animation: none !important;
