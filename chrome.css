@@ -1,22 +1,21 @@
-/* Zoom Out on Load — mod para Zen Browser
+/* Zoom on Load — mod para Zen Browser
  * Enquanto a aba selecionada está carregando (atributo [busy]), o conteúdo fica
- * levemente ampliado. Quando termina, ele volta ao tamanho normal com animação.
+ * levemente reduzido. Quando termina, ele dá um zoom até o tamanho normal.
  */
 
 :root {
-  --zol-scale: 1.06;      /* ampliação inicial (1.00 = sem efeito) */
-  --zol-duration: 0.6s;   /* duração do zoom out */
+  --zol-scale: 0.94;      /* escala inicial (menor que 1 = zoom in; maior que 1 = zoom out) */
+  --zol-duration: 0.6s;   /* duração do zoom */
   --zol-easing: cubic-bezier(0.22, 1, 0.36, 1);
   --zol-dim: 0.85;        /* opacidade durante o carregamento */
 }
 
-/* Recorta o conteúdo ampliado dentro do painel */
 #tabbrowser-tabpanels .browserSidebarContainer,
 #tabbrowser-tabpanels .browserContainer {
   overflow: hidden;
 }
 
-/* Estado normal (página carregada): anima de volta para escala 1 */
+/* Página carregada: anima até a escala normal */
 #tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack {
   transform: scale(1);
   opacity: 1;
@@ -27,7 +26,7 @@
   will-change: transform;
 }
 
-/* Estado carregando: ampliado, sem transição (snap instantâneo) */
+/* Carregando: escala inicial, sem transição */
 #main-window:has(#tabbrowser-tabs .tabbrowser-tab[selected][busy])
   #tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack {
   transform: scale(var(--zol-scale));
