@@ -4,10 +4,10 @@
  */
 
 :root {
-  --zol-scale: 0.94;      /* escala inicial (menor que 1 = zoom in; maior que 1 = zoom out) */
-  --zol-duration: 0.35s;  /* duração do zoom */
-  --zol-easing: cubic-bezier(0.22, 1, 0.36, 1);
-  --zol-dim: 0.85;        /* opacidade inicial */
+  --zol-scale: 0.975;     /* escala inicial (menor que 1 = zoom in; maior que 1 = zoom out) */
+  --zol-duration: 0.55s;  /* duração do zoom */
+  --zol-easing: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --zol-dim: 0.92;        /* opacidade inicial */
 }
 
 #tabbrowser-tabpanels .browserSidebarContainer,
@@ -29,6 +29,7 @@
 /* A animação roda toda vez que um painel passa a ser o selecionado */
 #tabbrowser-tabpanels .browserSidebarContainer.deck-selected .browserStack {
   transform-origin: center center;
+  will-change: transform, opacity;
   animation: zol-tab-zoom var(--zol-duration) var(--zol-easing) both;
 }
 
