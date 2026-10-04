@@ -5,8 +5,8 @@
 
 :root {
   --zol-scale: 0.985;     /* escala inicial (menor que 1 = zoom in; maior que 1 = zoom out) */
-  --zol-duration: 0.9s;   /* duração do zoom */
-  --zol-easing: cubic-bezier(0.33, 1, 0.68, 1);
+  --zol-duration: 0.4s;   /* duração do zoom */
+  --zol-easing: cubic-bezier(0.22, 1, 0.36, 1);
   --zol-dim: 0.96;        /* opacidade inicial */
 }
 
